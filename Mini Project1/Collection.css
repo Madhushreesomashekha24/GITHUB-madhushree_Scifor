@@ -1,0 +1,120 @@
+body {
+  background: linear-gradient(to right, #0719dc, #aa0aaa,rgb(62, 118, 142));
+  min-height: 100vh;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #fff; /* Optional: makes default text white */
+  }
+  
+    
+    .newsletter-section{
+      background: linear-gradient(135deg, #e0f7ef, #d4f5e6);
+      border: none;
+      border-radius: 15px;
+      animation: gradient-animation 5s infinite alternate;
+      
+    }
+  
+    .navbar {
+      background: linear-gradient(to right, #0b0434, #0b92bf, #b6bec2);
+      padding: 1rem;
+    }
+    .navbar-brand{
+      background: linear-gradient(135deg,rgb(153, 15, 82),rgb(206, 7, 179)); /* Dark green gradient */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; /* Makes the gradient visible only on the text */
+      font-weight: bold;
+      font-size: 2rem; /* Adjusted font size for the brand */
+      font-family: 'Lucida Handwriting', cursive;
+    }
+    .navbar-nav .nav-link {
+      background: linear-gradient(135deg,rgb(10, 10, 10),rgb(9, 9, 9)); /* Dark green gradient */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; /* Makes the gradient visible only on the text */
+      font-weight: bold;
+      margin-right: 1rem; /* Spacing between items */
+      transition: color 0.3s ease; /* Smooth transition for hover effect */
+    }
+    
+  
+    .navbar-nav .nav-link:hover {
+      transform: scale(1.1); /* Slightly enlarges the link */
+      background: linear-gradient(135deg, white, white); /* Gradient on hover */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; /* Keeps the gradient visible */
+      text-decoration: none; /
+    }
+  #bagCount {
+    color: #ffffff; /* Sets the text color to white */
+  }
+  .hero-section .btn {
+    background: linear-gradient(135deg, #14b38f, #e9506c); /* Initial gradient */
+    color: #ffffff; /* White text color */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background 0.3s ease; /* Smooth transition for hover and animation */
+    animation: button-gradient-animation 5s infinite alternate; /* Gradient animation */
+  }
+  
+  /* Hover Effect */
+  .hero-section .btn:hover {
+    transform: scale(1.1); /* Pop-up effect */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow for emphasis */
+    text-decoration: none; /* Removes underline */
+  }
+  .card {
+    background: linear-gradient(135deg,rgb(21, 213, 216),rgb(38, 140, 133));
+      border: none;
+      border-radius: 15px;
+    height: 300px; /* Adjust the height as needed */
+    overflow: hidden; /* Ensures content doesn't overflow */
+  }
+  
+  .card:hover {
+    transform: scale(1.05); /* Slightly enlarges the card on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow for emphasis */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+    text-decoration: none; /* Removes underline */
+    background: linear-gradient(135deg,rgb(5, 106, 71), #d4f5e6); /* Dark green gradient */
+
+  }
+
+.collections-header{
+    background: linear-gradient(135deg, #e0f7ef, #d4f5e6);
+    border: none;
+    border-radius: 15px;
+    animation: gradient-animation 5s infinite alternate;
+}
+.collections-header h1 {
+  animation: blink 2s infinite;
+}
+
+.collections-header p {
+  animation: blink 2s infinite;
+}
+/* Keyframes for the gradient animation */
+@keyframes gradient-animation {
+  0% {
+      background: linear-gradient(135deg,rgb(213, 234, 21), #d4f5e6);
+  }
+  50% {
+      background: linear-gradient(135deg,rgb(58, 172, 166),rgb(151, 241, 7));
+  }
+  100% {
+      background: linear-gradient(135deg,rgb(225, 29, 176), #a6c1ee);
+  }
+}
+  /* Blinking Animation */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
