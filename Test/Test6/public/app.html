@@ -1,0 +1,40 @@
+<html>
+    <head>
+          <meta charset="utf-8">
+          <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+         <meta name="viewport" content="width=device-width, initial-scale=1" />
+         <meta name="theme-color" content="#000000" />
+         <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!-- //react liabrary -->
+           <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+            <!-- //react dom  -->
+          <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  
+       <!-- //babel compiler -->
+          <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+           <div id="div1"></div>
+           <script type=text/babel>
+           //child component
+           const B=(props)=>{
+            return<div>
+            <h3>Data:{props.data}</h3>
+           </div>
+        }
+
+           const A=()=>{
+          const name="priya";
+           const lname="savale";
+                 return<div>
+          <h1>parent component</h1>
+            <B data={name+""+lname}/>
+             </div>
+       }
+          const root=ReactDOM.createRoot(document.getElementById("div1"));
+           root.render(<A/>);
+   </script>
+   </head>
+</html>
