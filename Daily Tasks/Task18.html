@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+      background-color: #38a4cc;
+    }
+    form {
+      background: lavender;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+   input, textarea, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+     #rating{
+        width: 105%;
+    }
+   button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+
+     .status {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    
+    
+    .message {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid green;
+      background-color: #e6ffe6;
+      color: green;
+      border-radius: 5px;
+    }
+    .submitted-data {
+      margin-top: 10px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Feedback Form</h2>
+  <form id="feedbackForm">
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName" name="fullName" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="rating">Feedback Rating</label>
+    <select id="rating" name="rating" required>
+       <option value="">Select Rating</option>
+      <option value="1">1 - Very Bad</option>
+      <option value="2">2 - Bad</option>
+      <option value="3">3 - Okay</option>
+      <option value="4">4 - Good</option>
+      <option value="5">5 - Excellent</option>
+    </select>
+     
+    <button type="submit">Submit Feedback</button>
+  </form>
+
+  <div class="status" id="statusMessage"></div>
+
+  <div id="response" class="message" style="display: none;">
+    Feedback submitted successfully!
+    <div class="submitted-data" id="submittedData"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const responseBox = document.getElementById('response');
+    const submittedDataBox = document.getElementById('submittedData');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const rating = document.getElementById('rating').value;
+
+      const data = { name, email, rating };
+
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(json => {
+       
+        responseBox.style.display = 'block';
+        submittedDataBox.innerHTML = `
+          <p><strong>Name:</strong> ${json.name}</p>
+          <p><strong>Email:</strong> ${json.email}</p>
+          <p><strong>Rating:</strong> ${json.rating}</p>
+        `;
+        form.reset();
+      })
+      .catch(error => {
+        responseBox.style.display = 'block';
+        responseBox.style.backgroundColor = '#ffe6e6';
+        responseBox.style.borderColor = 'red';
+        responseBox.style.color = 'red';
+        responseBox.textContent = 'An error occurred. Please try again.';
+        console.error('Error:', error);
+      });
+    });
+  </script>
+
+</body>
+</html>
