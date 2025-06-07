@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add User Form</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      body {
+        background: linear-gradient(to right, #f8f9fa, #e3f2fd);
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div id="root" class="d-flex justify-content-center align-items-center min-vh-100"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      const AddUserForm = () => {
+        const [name, setName] = useState("");
+        const [email, setEmail] = useState("");
+        const [message, setMessage] = useState(null);
+
+        const handleSubmit = async (event) => {
+          event.preventDefault();
+          setMessage(null);
+
+          try {
+            const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name, email }),
+            });
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            setMessage({
+              type: "success",
+              text: `✅ User "${data.name}" (ID: ${data.id}) added successfully.`,
+            });
+            setName("");
+            setEmail("");
+          } catch (error) {
+            setMessage({
+              type: "danger",
+              text: `❌ Failed to add user: ${error.message}`,
+            });
+          }
+        };
+
+        return (
+          <div className="card shadow-sm p-4" style={{ width: "100%", maxWidth: "420px" }}>
+            <h2 className="mb-4 text-center text-primary">Add New User</h2>
+            <form onSubmit={handleSubmit} autoComplete="off" aria-label="Add User Form">
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label">Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  placeholder="Enter full name"
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="Enter email address"
+                />
+              </div>
+              <button type="submit" className="btn btn-primary w-100">Add User</button>
+            </form>
+
+            {message && (
+              <div className={`alert alert-${message.type} mt-3`} role="alert">
+                {message.text}
+              </div>
+            )}
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<AddUserForm />);
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1MquTzY7GqLq0l4x8t8n6M"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
